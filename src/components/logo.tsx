@@ -1,5 +1,12 @@
-import React from 'react'
+import Image from 'next/image'
 
 export default function Logo() {
-	return <span>Logo</span>
+	return (
+		<Image
+			src="https://bytegrad.com/course-assets/react-nextjs/evento.png"
+			alt="Logo"
+			width={53}
+			height={12}
+		/>
+	)
 }
