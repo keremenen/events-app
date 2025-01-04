@@ -8,11 +8,11 @@ type PageProps = {
 	}
 }
 export default async function Page({ params }: PageProps) {
+	const city = await params.city
 	const reponse = await fetch(
-		'https://bytegrad.com/course-assets/projects/evento/api/events?city=austin'
+		`https://bytegrad.com/course-assets/projects/evento/api/events?city=${city}`
 	)
 	const events: EventoEvent[] = await reponse.json()
-	const city = (await params).city
 
 	return (
 		<main className="flex flex-col items-center py-24 px-5">
