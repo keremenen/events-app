@@ -16,7 +16,7 @@ export default async function Page({ params }: PageProps) {
 
 	return (
 		<main className="flex flex-col items-center py-24 px-5">
-			<H1>
+			<H1 className="mb-10">
 				{city === 'all' && 'All events'}
 				{city !== 'all' &&
 					'Events in ' + city.charAt(0).toUpperCase() + city.slice(1)}
