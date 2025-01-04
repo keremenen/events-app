@@ -8,6 +8,11 @@ type PageProps = {
 export default async function Page({ params }: PageProps) {
 	const city = (await params).city
 
+	const reponse = await fetch(
+		'https://bytegrad.com/course-assets/projects/evento/api/events?city=austin'
+	)
+	const events = await reponse.json()
+
 	return (
 		<main className="flex flex-col items-center py-24 px-5">
 			<H1>
@@ -15,6 +20,10 @@ export default async function Page({ params }: PageProps) {
 				{city !== 'all' &&
 					'Events in ' + city.charAt(0).toUpperCase() + city.slice(1)}
 			</H1>
+
+			{events.map((event) => (
+				<section key={event.id}>{event.name}</section>
+			))}
 		</main>
 	)
 }
