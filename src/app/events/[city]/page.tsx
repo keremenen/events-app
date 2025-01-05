@@ -8,7 +8,7 @@ type PageProps = {
 	}
 }
 export default async function Page({ params }: PageProps) {
-	const city = await params.city
+	const city = (await params).city
 	const reponse = await fetch(
 		`https://bytegrad.com/course-assets/projects/evento/api/events?city=${city}`
 	)
