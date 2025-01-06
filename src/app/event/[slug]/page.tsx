@@ -11,7 +11,12 @@ type EventPageProps = {
 export default async function EventPage({ params }: EventPageProps) {
 	const slug = (await params).slug
 	const response = await fetch(
-		`https://bytegrad.com/course-assets/projects/evento/api/events/${slug}`
+		`https://bytegrad.com/course-assets/projects/evento/api/events/${slug}`,
+		{
+			next: {
+				revalidate: 60,
+			},
+		}
 	)
 	const event: EventoEvent = await response.json()
 
