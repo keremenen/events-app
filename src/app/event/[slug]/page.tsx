@@ -50,13 +50,39 @@ export default async function EventPage({ params }: EventPageProps) {
 							Organized by <span className="italic">{event.organizerName}</span>
 						</p>
 
-						<button className="text-lg bg-white/20 capitalize py-2 rounded-md border-white/10 border-2 bg-blur mt-5 lg:mt-auto hover:scale-105 active:sacele-[102] transition focus:scale-105 w-full">
+						<button className="text-lg bg-white/20 capitalize py-2 rounded-md border-white/10 border-2 bg-blur mt-5 lg:mt-auto state-effect">
 							Get tickets
 						</button>
 					</div>
 				</div>
 			</section>
-			<div></div>
+			<div className="text-center px-5 py-16">
+				<Section>
+					<SectionHeading>About this event</SectionHeading>
+					<SectionText>{event.description}</SectionText>
+				</Section>
+
+				<Section>
+					<SectionHeading>Location</SectionHeading>
+					<SectionText>{event.description}</SectionText>
+				</Section>
+			</div>
 		</main>
+	)
+}
+
+function Section({ children }: { children: React.ReactNode }) {
+	return <section className="mb-12">{children}</section>
+}
+
+function SectionHeading({ children }: { children: React.ReactNode }) {
+	return <h2 className="text-2xl mb-8">{children}</h2>
+}
+
+function SectionText({ children }: { children: React.ReactNode }) {
+	return (
+		<p className="text-lg leading-8 text-white/75 max-w-4xl mx-auto">
+			{children}
+		</p>
 	)
 }
