@@ -6,15 +6,15 @@ export default function EventCard({ event }: { event: EventoEvent }) {
 	return (
 		<Link
 			href={`/event/${event.slug}`}
-			className="h-[380px] basis-80 flex-1 max-w-[500px]"
+			className="flex-1 basis-80 h-[380px] max-w-[500px]"
 		>
-			<section className="flex flex-col  bg-white/[3%] rounded-xl overflow-hidden relative state-effect  w-full h-full">
+			<section className="w-full h-full flex flex-col bg-white/[3%] rounded-xl overflow-hidden relative state-effects">
 				<Image
 					src={event.imageUrl}
 					width={500}
 					height={280}
 					alt={event.slug}
-					className="h-[60%] object-cover"
+					className="h-[60%] w-auto object-cover"
 				/>
 				<div className="flex flex-col justify-center items-center flex-1">
 					<h2>{event.name}</h2>

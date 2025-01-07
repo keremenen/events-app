@@ -10,8 +10,12 @@ type PageProps = {
 	}
 }
 
+type EventsPageProps = PageProps & {
+	searchParams: { [key: string]: string | string[] | undefined }
+}
+
 export async function generateMetadata({ params }: PageProps) {
-	const city = params.city
+	const city = (await params).city
 
 	return {
 		title:
@@ -19,8 +23,9 @@ export async function generateMetadata({ params }: PageProps) {
 	}
 }
 
-export default async function Page({ params }: PageProps) {
+export default async function Page({ params, searchParams }: EventsPageProps) {
 	const city = (await params).city
+	const page = (await searchParams).page || '1'
 
 	return (
 		<main className="flex flex-col items-center py-24 px-5">
@@ -30,7 +35,7 @@ export default async function Page({ params }: PageProps) {
 			</H1>
 
 			<Suspense fallback={<Loading />}>
-				<EventsList city={city} />
+				<EventsList city={city} page={+page} />
 			</Suspense>
 		</main>
 	)
