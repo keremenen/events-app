@@ -26,7 +26,9 @@ export default function EventCard({ event }: { event: EventoEvent }) {
 					<p className="text-xl font-bold -mb-[5px]">
 						{new Date(event.date).getDate().toString().padStart(2, '0')}
 					</p>
-					<p className="text-xs uppercase text-accent">Nov</p>
+					<p className="text-xs uppercase text-accent">
+						{new Date(event.date).toLocaleString('en-US', { month: 'short' })}
+					</p>
 				</section>
 			</section>
 		</Link>
