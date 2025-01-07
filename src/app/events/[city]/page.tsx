@@ -9,6 +9,16 @@ type PageProps = {
 		city: string
 	}
 }
+
+export async function generateMetadata({ params }: PageProps) {
+	const city = params.city
+
+	return {
+		title:
+			city === 'all' ? 'All events' : `Events in ${capitalize(city)} | Evento`,
+	}
+}
+
 export default async function Page({ params }: PageProps) {
 	const city = (await params).city
 
