@@ -18,12 +18,6 @@ export async function generateMetadata({
 	const slug = params.slug
 	const event = await getEvent(slug)
 
-	if (!event) {
-		return {
-			title: 'Event not found',
-		}
-	}
-
 	return {
 		title: event.name,
 	}
