@@ -1,5 +1,5 @@
 import H1 from '@/components/h1'
-import { EventoEvent } from '@/lib/types'
+import { EventoEvent } from '@prisma/client'
 import { getEvent } from '@/lib/utils'
 
 import { Metadata } from 'next'
@@ -17,6 +17,12 @@ export async function generateMetadata({
 }: PageProps): Promise<Metadata> {
 	const slug = params.slug
 	const event = await getEvent(slug)
+
+	if (!event) {
+		return {
+			title: 'Event not found',
+		}
+	}
 
 	return {
 		title: event.name,
