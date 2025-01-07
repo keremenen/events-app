@@ -1,8 +1,8 @@
 import EventsList from '@/components/events-list'
 import H1 from '@/components/h1'
-
 import { Suspense } from 'react'
 import Loading from './loading'
+import { capitalize } from '@/lib/utils'
 
 type PageProps = {
 	params: {
@@ -16,8 +16,7 @@ export default async function Page({ params }: PageProps) {
 		<main className="flex flex-col items-center py-24 px-5">
 			<H1 className="mb-10">
 				{city === 'all' && 'All events'}
-				{city !== 'all' &&
-					'Events in ' + city.charAt(0).toUpperCase() + city.slice(1)}
+				{city !== 'all' && 'Events in ' + capitalize(city)}
 			</H1>
 
 			<Suspense fallback={<Loading />}>

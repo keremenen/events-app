@@ -1,10 +1,17 @@
 import H1 from '@/components/h1'
 import { EventoEvent } from '@/lib/types'
+
 import Image from 'next/image'
 
 type EventPageProps = {
 	params: {
 		slug: string
+	}
+}
+
+export async function generateMetadata({ params }: EventPageProps) {
+	return {
+		title: `${params.slug} | Evento`,
 	}
 }
 
