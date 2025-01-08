@@ -3,6 +3,7 @@ import H1 from '@/components/h1'
 import { Suspense } from 'react'
 import Loading from './loading'
 import { capitalize } from '@/lib/utils'
+import { z } from 'zod'
 
 type PageProps = {
 	params: {
@@ -23,9 +24,15 @@ export async function generateMetadata({ params }: PageProps) {
 	}
 }
 
+const pageNumberSchema = z.coerce.number().int().positive().optional()
+
 export default async function Page({ params, searchParams }: EventsPageProps) {
 	const city = (await params).city
-	const page = (await searchParams).page || '1'
+	const page = (await searchParams).page
+	const parsedPage = pageNumberSchema.safeParse(page)
+	if (!parsedPage.success) {
+		throw new Error('Invalid page number')
+	}
 
 	return (
 		<main className="flex flex-col items-center py-24 px-5">
@@ -34,8 +41,8 @@ export default async function Page({ params, searchParams }: EventsPageProps) {
 				{city !== 'all' && 'Events in ' + capitalize(city)}
 			</H1>
 
-			<Suspense fallback={<Loading />}>
-				<EventsList city={city} page={+page} />
+			<Suspense fallback={<Loading />} key={city + parsedPage}>
+				<EventsList city={city} page={parsedPage.data} />
 			</Suspense>
 		</main>
 	)
