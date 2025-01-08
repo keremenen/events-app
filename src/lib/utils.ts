@@ -23,7 +23,13 @@ export async function getEvents(city: string, page: number) {
 		skip: (page - 1) * 6,
 	})
 
-	return events
+	const totalCount = await prisma.eventoEvent.count({
+		where: {
+			city: city === 'all' ? undefined : capitalize(city),
+		},
+	})
+
+	return { events, totalCount }
 }
 
 export async function getEvent(slug: string) {
